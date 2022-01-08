@@ -13,7 +13,7 @@ Enter the IP address of the control port of the CTP DIO device. The port can be 
 ## Actions
 - **Connect** a source (input) to a destination (output)
 - **Disconnect** a source (input) from a destination (output)
-- **Lock** a destination so that it cannot be connected to anything else or disconnected from the current source
+- **Lock** a destination so that it cannot be connected to anything else or disconnected from the current source. The lock state for each destination is held in a Companion variable.
 - **Adjust input/output level** the audio input/output gain can be adjusted from -12 to +12 with 0 being unity gain
 - **Status** display the current route table and audio level adjustments in the debug log
 - **Reset** provides the ability to reset the routing or the audio levels back to default
