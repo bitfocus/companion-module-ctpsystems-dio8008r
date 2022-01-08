@@ -1,5 +1,4 @@
-# companion-module-ctpsystems-dio8008r
-
+# CTP Systems DIO8008R/RX
 This module will control the DIO8008R and DIO8008RX Dante enabled audio routers. There are 16 Dante inputs/outputs and 8 Analogue inputs/outputs. 
 
 For more information on the product please visit these pages:
