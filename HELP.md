@@ -1,4 +1,4 @@
-# companion-module-ctpsystems-dio8008r
+# CTP Systems DIO8008R/RX
 
 This module will control the DIO8008R and DIO8008RX Dante enabled audio routers. There are 16 Dante inputs/outputs and 8 Analogue inputs/outputs. 
 
@@ -21,7 +21,7 @@ Enter the IP address of the control port of the CTP DIO device. The port can be 
 
 ## Version History
 
-### Version 1.1.0
+### Version 1.0.1
 Added ability to change source and destination labels
 
 ### Version 1.0.0
