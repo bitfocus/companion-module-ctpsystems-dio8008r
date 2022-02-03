@@ -1,7 +1,7 @@
 {
 	"name": "ctpsystems-dio8008r",
-	"version": "1.0.2",
-	"api_version": "1.0.0",
+	"version": "1.1.0",
+	"api_version": "1.0",
 	"keywords": [
 		"Dante",
 		"Audio",
@@ -20,13 +20,5 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "Peter Daniel",
-	"license": "MIT",
-	"homepage": "https://github.com/bitfocus/companion-module-ctpsystems-dio8008r#readme",
-	"bugs": {
-		"url": "https://github.com/bitfocus/companion-module-ctpsystems-dio8008r/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/bitfocus/companion-module-ctpsystems-dio8008r.git"
-	}
+	"license": "MIT"
 }

@@ -14,15 +14,24 @@ function instance(system) {
 	self.command = null
 
 	self.locks = []
-	self.port_labels = []
-
+	self.source_port_labels = []
+	self.dest_port_labels = []
+	
 	for (var i = 1; i <= 8; i++) {
-		self.port_labels.push({ id: 'A' + i, label: 'Analogue ' + i })
-		self.locks.push({ id: 'A' + i, value: 0 })
+		self.source_port_labels.push({ id: 'A' + i, label: 'Analogue ' + i })
 	}
 
 	for (var i = 1; i <= 16; i++) {
-		self.port_labels.push({ id: 'D' + i, label: 'Dante ' + i })
+		self.source_port_labels.push({ id: 'D' + i, label: 'Dante ' + i })
+	}
+	
+	for (var i = 1; i <= 8; i++) {
+		self.dest_port_labels.push({ id: 'A' + i, label: 'Analogue ' + i })
+		self.locks.push({ id: 'A' + i, value: 0 })
+	}
+	
+	for (var i = 1; i <= 16; i++) {
+		self.dest_port_labels.push({ id: 'D' + i, label: 'Dante ' + i })
 		self.locks.push({ id: 'D' + i, value: 0 })
 	}
 
@@ -154,6 +163,34 @@ instance.prototype.create_variables = function (system) {
 			name: 'lock_state_' + self.locks[i].id,
 		})
 	}
+	
+	for (var i = 1; i <= 8; i++) {
+		variables.push({
+			label: 'Label source A' + i,
+			name: 'label_source_A' + i,
+		})
+	}
+	
+	for (var i = 1; i <= 16; i++) {
+		variables.push({
+			label: 'Label source D' + i,
+			name: 'label_source_D' + i,
+		})
+	}
+
+	for (var i = 1; i <= 8; i++) {
+		variables.push({
+			label: 'Label destination A' + i,
+			name: 'label_dest_A' + i,
+		})
+	}
+
+	for (var i = 1; i <= 16; i++) {
+		variables.push({
+			label: 'Label destination D' + i,
+			name: 'label_dest_D' + i,
+		})
+	}
 
 	self.setVariableDefinitions(variables)
 }
@@ -163,6 +200,13 @@ instance.prototype.update_variables = function (system) {
 
 	for (var i = 0; i < self.locks.length; i++) {
 		self.setVariable('lock_state_' + self.locks[i].id, self.locks[i].value)
+	}
+	
+	for (var i = 0; i < self.source_port_labels.length; i++) {
+		self.setVariable('label_source_' + self.source_port_labels[i].id, self.source_port_labels[i].label)
+	}
+	for (var i = 0; i < self.dest_port_labels.length; i++) {
+		self.setVariable('label_dest_' + self.dest_port_labels[i].id, self.dest_port_labels[i].label)
 	}
 }
 
@@ -179,7 +223,7 @@ instance.prototype.init_presets = function () {
 instance.prototype.actions = function () {
 	var self = this
 
-	self.setActions({
+	self.system.emit('instance_actions', self.id, {
 		crosspoint: {
 			label: 'Connect',
 			options: [
@@ -188,14 +232,14 @@ instance.prototype.actions = function () {
 					label: 'Source',
 					id: 'source',
 					default: 'A1',
-					choices: self.port_labels,
+					choices: self.source_port_labels,
 				},
 				{
 					type: 'dropdown',
 					label: 'Destination',
 					id: 'destination',
 					default: 'D1',
-					choices: self.port_labels,
+					choices: self.dest_port_labels,
 				},
 			],
 		},
@@ -207,14 +251,14 @@ instance.prototype.actions = function () {
 					label: 'Source',
 					id: 'disconnect_source',
 					default: 'A1',
-					choices: self.port_labels,
+					choices: self.source_port_labels,
 				},
 				{
 					type: 'dropdown',
 					label: 'Destination',
 					id: 'disconnect_destination',
 					default: 'D1',
-					choices: self.port_labels,
+					choices: self.dest_port_labels,
 				},
 			],
 		},
@@ -226,7 +270,7 @@ instance.prototype.actions = function () {
 					label: 'Destination',
 					id: 'lock_destination',
 					default: 'A1',
-					choices: self.port_labels,
+					choices: self.dest_port_labels,
 				},
 				{
 					type: 'dropdown',
@@ -249,7 +293,7 @@ instance.prototype.actions = function () {
 					label: 'Input',
 					id: 'input_level_port',
 					default: 'A1',
-					choices: self.port_labels,
+					choices: self.source_port_labels,
 				},
 				{
 					type: 'number',
@@ -269,7 +313,7 @@ instance.prototype.actions = function () {
 					label: 'Output',
 					id: 'output_level_port',
 					default: 'A1',
-					choices: self.port_labels,
+					choices: self.dest_port_labels,
 				},
 				{
 					type: 'number',
@@ -283,6 +327,42 @@ instance.prototype.actions = function () {
 		},
 		status: {
 			label: 'Ask device for status',
+		},
+		user_source_label: {
+			label: 'Change source label',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Port',
+					id: 'source_label_port',
+					default: 'A1',
+					choices: self.source_port_labels,
+				},
+				{
+					type: 'textinput',
+					id: 'source_label_text',
+					label: 'New label',
+					regex: '/^.{1,30}$/',
+				}
+			]
+		},
+		user_dest_label: {
+			label: 'Change destination label',
+			options: [
+				{
+					type: 'dropdown',
+					label: 'Port',
+					id: 'dest_label_port',
+					default: 'A1',
+					choices: self.dest_port_labels,
+				},
+				{
+					type: 'textinput',
+					id: 'dest_label_text',
+					label: 'New label',
+					regex: '/^.{1,30}$/',
+				}
+			]
 		},
 		reset: {
 			label: 'Reset',
@@ -345,6 +425,34 @@ instance.prototype.action = function (action) {
 
 	if (action.action === 'output_level') {
 		cmd = 'O ' + action.options.output_level_port + '=' + action.options.output_level + '\r\n'
+	}
+
+	if (action.action === 'user_source_label') {
+		if (action.options.source_label_text.length > 0) {
+			self.debug(action.options.source_label_port + " changing to " + action.options.source_label_text)
+			objIndex = self.source_port_labels.findIndex((obj) => obj.id == action.options.source_label_port)
+			self.debug(objIndex)
+			self.source_port_labels[objIndex].label = action.options.source_label_text
+			self.update_variables()
+			self.actions()
+			self.debug(self.source_port_labels)
+		} else {
+			self.log('warn','New label for source ' + action.options.source_label_port + ' cannot be empty')
+		}
+	}
+
+	if (action.action === 'user_dest_label') {
+		if (action.options.dest_label_text.length > 0) {
+			self.debug(action.options.dest_label_port + " changing to " + action.options.dest_label_text)
+			objIndex = self.dest_port_labels.findIndex((obj) => obj.id == action.options.dest_label_port)
+			self.debug(objIndex)
+			self.dest_port_labels[objIndex].label = action.options.dest_label_text
+			self.update_variables()
+			self.actions()
+			self.debug(self.dest_port_labels)
+		} else {
+			self.log('warn','New label for destination ' + action.options.dest_label_port + ' cannot be empty')
+		}
 	}
 
 	if (action.action === 'reset') {
