@@ -1,0 +1,34 @@
+{
+	"id": "ctpsystems-dio8008r",
+	"name": "ctpsystems-dio8008r",
+	"shortname": "DIO8008R",
+	"description": "The DIO8008R is a Dante enabled control unit for switching audio sources/destinations.",
+	"version": "2.0.0",
+	"license": "MIT",
+	"repository": "git+https://github.com/bitfocus/companion-module-ctpsystems-dio8008r.git",
+	"bugs": "https://github.com/bitfocus/companion-module-ctpsystems-dio8008r/issues",
+	"maintainers": [
+		{
+			"name": "Peter Daniel"
+		}
+	],
+	"legacyIds": [],
+	"runtime": {
+		"type": "node18",
+		"api": "nodejs-ipc",
+		"apiVersion": "0.0.0",
+		"entrypoint": "../index.js"
+	},
+	"manufacturer": "CTP Systems",
+	"products": [
+		"DIO8008R",
+		"DIO8008RX"
+	],
+	"keywords": [
+		"Dante",
+		"Audio",
+		"Router",
+		"Matrix",
+		"Switcher"
+	]
+}
