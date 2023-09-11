@@ -21,17 +21,17 @@ Enter the IP address of the control port of the CTP DIO device. The port can be 
 ## Version History
 
 ### Version 1.0.0
-First Release
+- First Release
 
 ### Version 1.0.1
-Added ability to change source and destination labels
+- Added ability to change source and destination labels
 
 ### Version 1.0.2
-Maintenance
+- Maintenance
 
 ### Version 1.0.3
-Maintenance
+- Maintenance
 
 ### Version 2.0.0
-Rewrite for Companion v3
-Remove lock functions
+- Rewrite for Companion v3
+- Remove lock functions
