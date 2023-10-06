@@ -103,10 +103,11 @@ class CTP_DIO8008 extends InstanceBase {
 				console.log('Data received')
 				console.log(data)
 
-				var i = 0,
-					line = '',
-					offset = 0
-					receivebuffer += data
+				var i = 0
+				var line = ''
+				var offset = 0
+				var receivebuffer = ''
+				receivebuffer += data
 
 				while ((i = receivebuffer.indexOf('\n', offset)) !== -1) {
 					line = receivebuffer.substr(offset, i - offset)
