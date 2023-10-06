@@ -13,7 +13,6 @@ class CTP_DIO8008 extends InstanceBase {
 		this.updateActions = updateActions.bind(this)
 		this.updatePresets = updatePresets.bind(this)
 		this.updateVariables = updateVariables.bind(this)
-
 	}
 
 	async init(config) {
@@ -60,7 +59,6 @@ class CTP_DIO8008 extends InstanceBase {
 
 		this.init_tcp()
 		this.updateVariables()
-
 	}
 
 	async destroy() {
@@ -79,7 +77,7 @@ class CTP_DIO8008 extends InstanceBase {
 
 	init_tcp() {
 		console.log('initTCP ' + this.config.host + ':' + this.config.port)
-		
+
 		if (this.socket) {
 			this.socket.destroy()
 			delete this.socket
@@ -134,7 +132,6 @@ class CTP_DIO8008 extends InstanceBase {
 			}
 		}
 	}
-
 }
 
 runEntrypoint(CTP_DIO8008, [])
