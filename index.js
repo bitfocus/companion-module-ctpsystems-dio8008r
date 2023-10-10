@@ -98,8 +98,8 @@ class CTP_DIO8008 extends InstanceBase {
 			})
 
 			this.socket.on('data', (data) => {
-				console.log('Data received')
-				console.log(data)
+				// console.log('Data received')
+				// console.log(data)
 
 				var i = 0
 				var line = ''
@@ -112,7 +112,7 @@ class CTP_DIO8008 extends InstanceBase {
 					offset = i + 1
 					console.log('Response from device: ', line)
 					if (line != 'OK') {
-						this.log('debug', line.toString())
+						this.log('info', line.toString())
 					}
 				}
 				receivebuffer = receivebuffer.substr(offset)
