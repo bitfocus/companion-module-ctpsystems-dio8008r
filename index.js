@@ -110,9 +110,8 @@ class CTP_DIO8008 extends InstanceBase {
 				while ((i = receivebuffer.indexOf('\n', offset)) !== -1) {
 					line = receivebuffer.substr(offset, i - offset)
 					offset = i + 1
-					console.log('Response from device: ', line)
 					if (line != 'OK') {
-						this.log('debug', line.toString())
+						this.log('info', line)
 					}
 				}
 				receivebuffer = receivebuffer.substr(offset)
