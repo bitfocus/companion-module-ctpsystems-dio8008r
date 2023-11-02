@@ -112,7 +112,7 @@ class CTP_DIO8008 extends InstanceBase {
 					offset = i + 1
 					console.log('Response from device: ', line)
 					if (line != 'OK') {
-						this.log('info', line.toString())
+						this.log('debug', line.toString())
 					}
 				}
 				receivebuffer = receivebuffer.substr(offset)
@@ -123,9 +123,9 @@ class CTP_DIO8008 extends InstanceBase {
 	}
 
 	sendCommand(cmd) {
-		console.log('Trying to send: ' + cmd)
 		if (cmd !== undefined) {
 			if (this.socket !== undefined) {
+				this.log('info', 'Sending: ' + cmd)
 				this.socket.send(cmd)
 			} else {
 				this.log('warn', 'Socket not connected, tried to send: ' + cmd)
