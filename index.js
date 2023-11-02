@@ -1,6 +1,6 @@
 // CTP Systems DIO8008R or DIO8008RX
 
-import { InstanceBase, InstanceStatus, runEntrypoint, TCPHelper, UDPHelper } from '@companion-module/base'
+import { InstanceBase, InstanceStatus, runEntrypoint, TCPHelper } from '@companion-module/base'
 import { ConfigFields } from './config.js'
 import { updateActions } from './actions.js'
 import { updatePresets } from './presets.js'
@@ -45,10 +45,6 @@ class CTP_DIO8008 extends InstanceBase {
 	}
 
 	async configUpdated(config) {
-		if (this.udp) {
-			this.udp.destroy()
-			delete this.udp
-		}
 
 		if (this.socket) {
 			this.socket.destroy()
