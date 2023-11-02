@@ -139,11 +139,10 @@ export function updateActions() {
 			},
 		],
 		callback: ({ options }) => {
-			console.log('Set input ' + options.input_level_port + ' to ' + options.input_level)
 			var cmd = 'I ' + options.input_level_port + '=' + options.input_level + '\r\n'
 			this.sendCommand(cmd)
-		}
-	},
+		},
+	}
 
 	actions['output_level'] = {
 		name: 'Adjust output level',
@@ -165,11 +164,10 @@ export function updateActions() {
 			},
 		],
 		callback: ({ options }) => {
-			console.log('Set output ' + options.output_level_port + ' to ' + options.output_level)
 			var cmd = 'O ' + options.output_level_port + '=' + options.output_level + '\r\n'
 			this.sendCommand(cmd)
-		}
-	},
+		},
+	}
 
 	actions['reset'] = {
 		name: 'Reset',
@@ -188,18 +186,16 @@ export function updateActions() {
 		callback: ({ options }) => {
 			var cmd = options.reset + '\r\n'
 			this.sendCommand(cmd)
-		}
-	},
+		},
+	}
 
 	actions['status'] = {
 		name: 'Status',
-		options: [
-		],
+		options: [],
 		callback: ({ options }) => {
 			var cmd = 'status\r\n'
 			this.sendCommand(cmd)
-		}
-	},
-
+		},
+	}
 	this.setActionDefinitions(actions)
 }
