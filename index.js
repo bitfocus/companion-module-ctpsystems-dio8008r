@@ -60,10 +60,6 @@ class CTP_DIO8008 extends InstanceBase {
 	async destroy() {
 		if (this.socket) {
 			this.socket.destroy()
-		} else if (this.udp) {
-			this.udp.destroy()
-		} else {
-			this.updateStatus(InstanceStatus.Disconnected)
 		}
 	}
 
